@@ -6,8 +6,7 @@
     "transports/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces",
-    "prepare": "npm run build --workspaces"
+    "build": "npm run build --workspaces"
   },
   "devDependencies": {
     "@parcel/packager-ts": "^2.13.2",
