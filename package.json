@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces",
-    "prepare": "npm run build"
+    "prepare": "npm run build --workspaces"
   },
   "devDependencies": {
     "@parcel/packager-ts": "^2.13.2",
