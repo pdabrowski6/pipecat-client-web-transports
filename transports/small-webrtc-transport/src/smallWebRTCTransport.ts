@@ -675,6 +675,15 @@ export class SmallWebRTCTransport extends Transport {
     options: RTCDataChannelInit,
   ): RTCDataChannel {
     const dc = this.pc!.createDataChannel(label, options);
+    const originalSend = dc.send.bind(dc) as (data: string | ArrayBuffer | ArrayBufferView | Blob) => void;
+
+    dc.send = (message: string | ArrayBuffer | ArrayBufferView | Blob) => {
+      if (dc.readyState === 'open') {
+        return originalSend(message);
+      }
+      // Silently fail for non-open states (closing, closed, connecting)
+      return false;
+    };
 
     dc.addEventListener("close", () => {
       logger.debug("datachannel closed");
